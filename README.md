@@ -1,0 +1,2 @@
+# p7
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d6380b7438cb401fa089c673cb45ff30)](https://app.codacy.com/gh/Nerpp/p7?utm_source=github.com&utm_medium=referral&utm_content=Nerpp/p7&utm_campaign=Badge_Grade_Settings)
