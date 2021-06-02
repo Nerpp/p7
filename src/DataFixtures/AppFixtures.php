@@ -136,7 +136,6 @@ class AppFixtures extends Fixture
             $product->setDescription($productListed['description']);
             $product->setPrice($productListed['price']);
             $product->setCreatedAt(new \DateTime('+4 days'));
-            $product->setUser($allUser[0]);
             $manager->persist($product);
         }
                
