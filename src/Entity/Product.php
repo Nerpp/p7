@@ -20,37 +20,32 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $brand;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $battery;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $ram;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $generation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $system;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $intern_memory;
 
@@ -69,11 +64,15 @@ class Product
      */
     private $description;
 
-
     /**
      * @ORM\Column(type="float")
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $ram;
 
     public function getId(): ?int
     {
@@ -112,18 +111,6 @@ class Product
     public function setBattery(string $battery): self
     {
         $this->battery = $battery;
-
-        return $this;
-    }
-
-    public function getRam(): ?string
-    {
-        return $this->ram;
-    }
-
-    public function setRam(string $ram): self
-    {
-        $this->ram = $ram;
 
         return $this;
     }
@@ -208,6 +195,18 @@ class Product
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getRam(): ?string
+    {
+        return $this->ram;
+    }
+
+    public function setRam(string $ram): self
+    {
+        $this->ram = $ram;
 
         return $this;
     }
