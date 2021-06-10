@@ -44,11 +44,6 @@ class User implements UserInterface
     private $createdAt;
 
     /**
-     * @ORM\OneToMany(targetEntity=Product::class, mappedBy="user")
-     */
-    private $product;
-
-    /**
      * @ORM\OneToMany(targetEntity=Customer::class, mappedBy="user", orphanRemoval=true)
      */
     private $customer;
@@ -153,36 +148,6 @@ class User implements UserInterface
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Product[]
-     */
-    public function getProduct(): Collection
-    {
-        return $this->product;
-    }
-
-    public function addProduct(Product $product): self
-    {
-        if (!$this->product->contains($product)) {
-            $this->product[] = $product;
-            $product->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): self
-    {
-        if ($this->product->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getUser() === $this) {
-                $product->setUser(null);
-            }
-        }
 
         return $this;
     }

@@ -69,11 +69,6 @@ class Product
      */
     private $description;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="product")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
 
     /**
      * @ORM\Column(type="float")
@@ -201,18 +196,6 @@ class Product
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
 
         return $this;
     }
