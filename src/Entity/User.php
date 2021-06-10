@@ -8,12 +8,14 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @ORM\Table(name="`user`")
  * @ApiResource
  */
-class User implements UserInterface
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     /**
      * @ORM\Id
@@ -38,24 +40,23 @@ class User implements UserInterface
      */
     private $password;
 
+     /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $username;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Customer::class, mappedBy="api_user", orphanRemoval=true)
+     */
+    private $customer;
+
     /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Customer::class, mappedBy="user", orphanRemoval=true)
-     */
-    private $customer;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
     public function __construct()
     {
-        $this->product = new ArrayCollection();
         $this->customer = new ArrayCollection();
     }
 
@@ -81,7 +82,7 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
-    public function getUsername(): string
+    public function getUserIdentifier(): string
     {
         return (string) $this->email;
     }
@@ -106,7 +107,7 @@ class User implements UserInterface
     }
 
     /**
-     * @see UserInterface
+     * @see PasswordAuthenticatedUserInterface
      */
     public function getPassword(): string
     {
@@ -140,14 +141,14 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getUsername(): ?string
     {
-        return $this->createdAt;
+        return $this->username;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setUsername(string $username): self
     {
-        $this->createdAt = $createdAt;
+        $this->username = $username;
 
         return $this;
     }
@@ -164,7 +165,7 @@ class User implements UserInterface
     {
         if (!$this->customer->contains($customer)) {
             $this->customer[] = $customer;
-            $customer->setUser($this);
+            $customer->setApiUser($this);
         }
 
         return $this;
@@ -174,22 +175,22 @@ class User implements UserInterface
     {
         if ($this->customer->removeElement($customer)) {
             // set the owning side to null (unless already changed)
-            if ($customer->getUser() === $this) {
-                $customer->setUser(null);
+            if ($customer->getApiUser() === $this) {
+                $customer->setApiUser(null);
             }
         }
 
         return $this;
     }
 
-    public function getName(): ?string
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->name;
+        return $this->createdAt;
     }
 
-    public function setName(string $name): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->name = $name;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

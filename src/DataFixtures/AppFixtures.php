@@ -3,19 +3,22 @@
 namespace App\DataFixtures;
 
 use App\Entity\User;
-use App\Entity\Customer;
 use App\Entity\Product;
+use App\Entity\Customer;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 
 class AppFixtures extends Fixture
 {
-    public function __construct(UserPasswordEncoderInterface $encoder)
-    {
-        $this->encoder = $encoder;
-    }
+         private $passwordHasher;
+
+         public function __construct(UserPasswordHasherInterface $passwordHasher)
+         {
+             $this->passwordHasher = $passwordHasher;
+        }
 
     public function load(ObjectManager $manager)
     {
@@ -114,15 +117,14 @@ class AppFixtures extends Fixture
         $user = new User;
 
         $user->setEmail('jean.fourcheraude@gmail.com');
-        $user->setPassword($this->encoder->encodePassword($user, "123456"));
-        $user->setName('Fourcheraude');
+        $user->setPassword($this->passwordHasher->hashPassword($user,"123456"));
+        $user->setUsername('Fourcheraude');
         $user->setCreatedAt(new \DateTime('+2 days'));
         $manager->persist($user);
         $allUser[] = $user;
         $manager->flush();
 
-      
-
+    
         foreach($listProduct as $productListed)
         {
             $product = new Product();
@@ -147,7 +149,7 @@ class AppFixtures extends Fixture
             $customer->setEmail($CustomerListed['email']);
             $customer->setUsername($CustomerListed['username']);
             $customer->setCreatedAt( new \DateTime('+8 days'));
-            $customer->setUser($allUser[0]);
+            $customer->setApiUser($allUser[0]);
             $manager->persist($customer);
         }
 

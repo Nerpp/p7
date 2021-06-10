@@ -20,12 +20,12 @@ class Customer
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $email;
 
@@ -38,7 +38,7 @@ class Customer
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="customer")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private $api_user;
 
     public function getId(): ?int
     {
@@ -81,14 +81,14 @@ class Customer
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getApiUser(): ?User
     {
-        return $this->user;
+        return $this->api_user;
     }
 
-    public function setUser(?User $user): self
+    public function setApiUser(?User $api_user): self
     {
-        $this->user = $user;
+        $this->api_user = $api_user;
 
         return $this;
     }
