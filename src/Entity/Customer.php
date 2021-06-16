@@ -8,7 +8,9 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
- * @ApiResource
+ *  @ApiResource(
+ *     normalizationContext={"groups"={"customer_listing:read"}}
+ * )
  */
 class Customer
 {
