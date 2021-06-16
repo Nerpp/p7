@@ -8,7 +8,17 @@ use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
- * @ApiResource
+ * @ApiResource(
+ *     collectionOperations={
+ *         "get"
+ *      },
+ *     itemOperations={
+ *         "get"
+ *     },
+ *     attributes={
+ *          "pagination_items_per_page"=20,
+ *     },
+ * )
  */
 class Product
 {

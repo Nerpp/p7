@@ -22,6 +22,21 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         parent::__construct($registry, User::class);
     }
 
+    // j'ai rajouté cette fonction en accord avec la doc https://symfony.com/doc/current/security/user_provider.html
+    // public function loadUserByIdentifier(string $usernameOrEmail): ?User
+    // {
+    //     $entityManager = $this->getEntityManager();
+
+    //     return $entityManager->createQuery(
+    //             'SELECT u
+    //             FROM App\Entity\User u
+    //             WHERE u.username = :query
+    //             OR u.email = :query'
+    //         )
+    //         ->setParameter('query', $usernameOrEmail)
+    //         ->getOneOrNullResult();
+    // }
+
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */
