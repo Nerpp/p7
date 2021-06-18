@@ -14,10 +14,10 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @ApiResource(
- *      attributes={"security"="is_granted('ROLE_ADMIN')","pagination_items_per_page"=20,},
+ *      attributes={"security"="is_granted('ROLE_USER')","pagination_items_per_page"=20,},
  *      collectionOperations={
- *         "get"={"security"="is_granted('ROLE_ADMIN')"},
- *         "post"={"security"="is_granted('ROLE_ADMIN')"}
+ *         "get"={"security"="is_granted('ROLE_ADMIN')", "security_message"="Only admins can get the list of users."},
+ *         "post"={"security"="is_granted('ROLE_ADMIN')", "security_message"="Only admins can create a new user."}
  *      },
  *      itemOperations={
  *          "get"={"security"="is_granted('ROLE_ADMIN)"},

@@ -12,7 +12,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *      attributes={"security"="is_granted('ROLE_USER')","pagination_items_per_page"=20,},
  *      collectionOperations={
  *         "get"={"security"="is_granted('ROLE_USER')"},
- *         "post"={"security"="is_granted('ROLE_ADMIN')"}
+ *         "post"={"security"="is_granted('ROLE_ADMIN')", "security_message"="Only admins can create a new product."}
  *      },
  *      itemOperations={
  *          "get"={"security"="is_granted('ROLE_ADMIN)"},
