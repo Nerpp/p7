@@ -9,7 +9,16 @@ use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
  *  @ApiResource(
- *     normalizationContext={"groups"={"customer_listing:read"}}
+ *      attributes={"security"="is_granted('ROLE_USER')"},
+ *      collectionOperations={
+ *         "get"={"security"="is_granted('ROLE_USER')"},
+ *         "post"={"security"="is_granted('ROLE_USER')"}
+ *      },
+ *      itemOperations={
+ *      "get"={"security"="is_granted('ROLE_USER')"},
+ *      "put"={"security"="is_granted('ROLE_USER')"},
+ *      "delete"={"security"="is_granted('ROLE_USER')"}
+ *      },
  * )
  */
 class Customer
