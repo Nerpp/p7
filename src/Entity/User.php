@@ -13,7 +13,18 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
- * @ApiResource
+ * @ApiResource(
+ *      attributes={"security"="is_granted('ROLE_ADMIN')","pagination_items_per_page"=20,},
+ *      collectionOperations={
+ *         "get"={"security"="is_granted('ROLE_ADMIN')"},
+ *         "post"={"security"="is_granted('ROLE_ADMIN')"}
+ *      },
+ *      itemOperations={
+ *          "get"={"security"="is_granted('ROLE_ADMIN)"},
+ *          "put"={"security"="is_granted('ROLE_ADMIN')"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
+ *      },
+ * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

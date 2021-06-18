@@ -9,15 +9,16 @@ use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  * @ApiResource(
- *     collectionOperations={
- *         "get"
+ *      attributes={"security"="is_granted('ROLE_USER')","pagination_items_per_page"=20,},
+ *      collectionOperations={
+ *         "get"={"security"="is_granted('ROLE_USER')"},
+ *         "post"={"security"="is_granted('ROLE_ADMIN')"}
  *      },
- *     itemOperations={
- *         "get"
- *     },
- *     attributes={
- *          "pagination_items_per_page"=20,
- *     },
+ *      itemOperations={
+ *          "get"={"security"="is_granted('ROLE_ADMIN)"},
+ *          "put"={"security"="is_granted('ROLE_ADMIN')"},
+ *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
+ *      },
  * )
  */
 class Product
