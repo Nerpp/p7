@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
@@ -10,18 +11,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
+use Gedmo\Mapping\Annotation as Gedmo;
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @ApiResource(
- *      attributes={"security"="is_granted('ROLE_USER')","pagination_items_per_page"=20,},
+ *      
  *      collectionOperations={
  *         "get"={"security"="is_granted('ROLE_ADMIN')", "security_message"="Only admins can get the list of users."},
- *         "post"={"security"="is_granted('ROLE_ADMIN')", "security_message"="Only admins can create a new user."}
+ *         "post"
  *      },
  *      itemOperations={
  *          "get"={"security"="is_granted('ROLE_ADMIN)"},
- *          "put"={"security"="is_granted('ROLE_ADMIN')"},
  *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
  *      },
  * )
@@ -51,10 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $password;
 
-     /**
-     * @ORM\Column(type="string", length=45)
-     */
-    private $username;
+
 
     /**
      * @ORM\OneToMany(targetEntity=Customer::class, mappedBy="api_user", orphanRemoval=true)
@@ -66,9 +65,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $createdAt;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
     public function __construct()
     {
         $this->customer = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -157,6 +162,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getUserIdentifier();
     }
 
+  
 
     /**
      * @return Collection|Customer[]
@@ -195,7 +201,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
+        
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

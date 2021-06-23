@@ -118,7 +118,7 @@ class AppFixtures extends Fixture
 
         $user->setEmail('jean.fourcheraude@gmail.com');
         $user->setPassword($this->passwordHasher->hashPassword($user,"123456"));
-        $user->setUsername('Fourcheraude');
+        $user->setName('Fourcheraude');
         $user->setCreatedAt(new \DateTime('+2 days'));
         $manager->persist($user);
         $allUser[] = $user;
