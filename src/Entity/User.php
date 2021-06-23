@@ -16,11 +16,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
- * @ApiResource(
+ *@ApiResource(
  *      
  *      collectionOperations={
  *         "get"={"security"="is_granted('ROLE_ADMIN')", "security_message"="Only admins can get the list of users."},
- *         "post"
+ *         "post"={"path"="signup"}
  *      },
  *      itemOperations={
  *          "get"={"security"="is_granted('ROLE_ADMIN)"},
