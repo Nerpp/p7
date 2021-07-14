@@ -4,22 +4,29 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+
+
 
 /**
- * @ORM\Entity(repositoryClass=CustomerRepository::class)
- *  @ApiResource(
- *      attributes={"security"="is_granted('ROLE_USER')"},
- *      collectionOperations={
- *         "get"={"security"="is_granted('ROLE_USER')"},
- *         "post"={"security"="is_granted('ROLE_USER')"}
- *      },
- *      itemOperations={
- *      "get"={"security"="is_granted('ROLE_USER')"},
- *      "put"={"security"="is_granted('ROLE_USER')"},
- *      "delete"={"security"="is_granted('ROLE_USER')"}
- *      },
+ * @ApiResource(
+ * attributes={"pagination_items_per_page"=5,"security"="is_granted('ROLE_USER')" },
+ * collectionOperations={
+ * "get",
+ * "post"
+ * },
+ * 
+ * itemOperations={
+ * "get",
+ * "put"={"security"="object.user == user"},
+ * "delete"={"security"="object.user == user"}
+ * },
+ * 
+ * 
  * )
+ * @ORM\Entity(repositoryClass=CustomerRepository::class)
  */
 class Customer
 {
@@ -27,6 +34,7 @@ class Customer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
      */
     private $id;
 
@@ -40,16 +48,13 @@ class Customer
      */
     private $email;
 
+    // TODO mettre en public est une mauvaise pratique cela brise l'encapsulation
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
+     * @var User The owner
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="customer")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $api_user;
+    private $user;
 
     public function getId(): ?int
     {
@@ -80,26 +85,14 @@ class Customer
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getUser(): ?User
     {
-        return $this->createdAt;
+        return $this->user;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setUser(?User $user): self
     {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getApiUser(): ?User
-    {
-        return $this->api_user;
-    }
-
-    public function setApiUser(?User $api_user): self
-    {
-        $this->api_user = $api_user;
+        $this->user = $user;
 
         return $this;
     }
