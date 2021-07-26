@@ -17,9 +17,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 /**
  * @ApiResource(
  * collectionOperations={
- *         "post"={"path"="signup"}
- *         
- *      },
+ *         "post"={"path"="signup"},
+ * },
  * itemOperations={
  *          "get"
  *      },

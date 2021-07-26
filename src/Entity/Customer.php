@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+// use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
-use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 
 
 
@@ -20,8 +21,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * 
  * itemOperations={
  * "get",
- * "put"={"security"="object.user == user"},
- * "delete"={"security"="object.user == user"}
+ * "put",
+ * "delete"
  * },
  * 
  * 
@@ -40,15 +41,17 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
      */
     private $email;
 
-    // TODO mettre en public est une mauvaise pratique cela brise l'encapsulation
+    
     /**
      * @var User The owner
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="customer")
