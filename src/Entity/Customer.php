@@ -6,7 +6,6 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
 
 
@@ -48,6 +47,7 @@ class Customer
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
+     * @Assert\Email(message = "Votre mail n'est pas valide")
      */
     private $email;
 
