@@ -2,26 +2,24 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ProductRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\PhoneRepository;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProductRepository::class)
+ * 
  * @ApiResource(
- *      attributes={"security"="is_granted('ROLE_USER')","pagination_items_per_page"=20,},
- *      collectionOperations={
- *         "get"={"security"="is_granted('ROLE_USER')"},
- *         "post"={"security"="is_granted('ROLE_ADMIN')"}
- *      },
+ *      attributes={"pagination_items_per_page"=2,"security"="is_granted('ROLE_USER')" },
  *      itemOperations={
- *          "get"={"security"="is_granted('ROLE_ADMIN)"},
- *          "put"={"security"="is_granted('ROLE_ADMIN')"},
- *          "delete"={"security"="is_granted('ROLE_ADMIN')"}
- *      },
+ *                      "get"
+ *                     },
+ *      collectionOperations={
+ *                        "get"
+ *                      }
  * )
+ * @ORM\Entity(repositoryClass=PhoneRepository::class)
  */
-class Product
+class Phone
 {
     /**
      * @ORM\Id
@@ -58,17 +56,12 @@ class Product
     /**
      * @ORM\Column(type="string", length=45)
      */
-    private $intern_memory;
+    private $internMemory;
 
     /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $property = [];
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -152,12 +145,12 @@ class Product
 
     public function getInternMemory(): ?string
     {
-        return $this->intern_memory;
+        return $this->internMemory;
     }
 
-    public function setInternMemory(string $intern_memory): self
+    public function setInternMemory(string $internMemory): self
     {
-        $this->intern_memory = $intern_memory;
+        $this->internMemory = $internMemory;
 
         return $this;
     }
@@ -170,18 +163,6 @@ class Product
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getProperty(): ?array
-    {
-        return $this->property;
-    }
-
-    public function setProperty(array $property): self
-    {
-        $this->property = $property;
 
         return $this;
     }
