@@ -25,7 +25,22 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  *         "openapi_context"={
  *                              "summary"="Check User connection",
  *                              "description"="User identification",
- *      }
+ *                          "requestBody"={
+ *                                          "content"={
+ *                                                       "application/json"={
+ *                                                                          "schema"={
+ *                                                                              "type"="object",
+ *                                                                              "properties"=
+ *                                                                                              {
+ *                                                                                                   
+ *                                                                                                  "password"={"type"="string"},
+ *                                                                                                  "username" ={"type"="string"},
+ *                          },
+ *                      },
+ *                  },
+ *              },
+ *          },
+ *      },
  *  }
  * },
  * itemOperations={
