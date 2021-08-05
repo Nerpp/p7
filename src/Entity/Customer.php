@@ -59,6 +59,16 @@ class Customer
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $surname;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +106,30 @@ class Customer
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
+
+    public function setSurname(string $surname): self
+    {
+        $this->surname = $surname;
 
         return $this;
     }
