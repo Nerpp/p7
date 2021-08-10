@@ -75,80 +75,115 @@ class AppFixtures extends Fixture
             $listCustomer0 = [
                 [
                     'email' => 'michelBernard@gmail.com',
-                    'username' => 'Michel'
-                    
+                    'username' => 'Michel',
+                    'name' => 'Michel',
+                    'surname' => 'Bernard'
                 ],
                 [
                     'email' => 'marie.therese@gmail.com',
-                    'username' => 'Batignolles'
+                    'username' => 'Batignolles',
+                    'name' => 'marie-therese',
+                    'surname' => 'des batignolles'
                 ],
                 [
                     'email' => 'gnosprick@gmail.com',
-                    'username' => 'Hermon'
+                    'username' => 'Hermon',
+                    'name' => 'hermon',
+                    'surname' => 'James'
                 ],
                 [
                     'email' => 'emmanuel@gmail.com',
-                    'username' => 'Flinch'
+                    'username' => 'Flinch',
+                    'name' => 'Flinch',
+                    'surname' => 'Gerard'
                 ],
                 [
                     'email' => 'juliengern@gmail.com',
-                    'username' => 'Julien'
+                    'username' => 'Julien',
+                    'name' => 'Julien',
+                    'surname' => 'Gern'
                 ],
                 [
                     'email' => 'bernadette@gmail.com',
-                    'username' => 'Marne'
+                    'username' => 'Marne',
+                    'name' => 'Bernardette',
+                    'surname' => 'Marne'
                 ],
                 [
                     'email' => 'mathildejick@gmail.com',
-                    'username' => 'Mathilde'
+                    'username' => 'Mathilde',
+                    'name' => 'Mathidle',
+                    'surname' => 'Jick'
                 ],
                 [
                     'email' => 'robert.lui@gmail.com',
-                    'username' => 'Lui Robert'
+                    'username' => 'Lui',
+                    'name' => 'Louis',
+                    'surname' => 'Robert'
                 ],
                 [
                     'email' => 'dark@gmail.com',
-                    'username' => 'Vador'
+                    'username' => 'Vador',
+                    'name' => 'Dark',
+                    'surname' => 'Vador'
                 ],
             ];
     
             $listCustomer1 = [
                 [
                     'email' => 'baptisteUnk@gmail.com',
-                    'username' => 'Batiste'
+                    'username' => 'Batiste',
+                    'name' => 'Baptiste',
+                    'surname' => 'Unk'
                     
                 ],
                 [
                     'email' => 'joseph.desk@gmail.com',
-                    'username' => 'joseph'
+                    'username' => 'joseph',
+                    'name' => 'Joseph',
+                    'surname' => 'Desk'
                 ],
                 [
                     'email' => 'edgard.long@gmail.com',
-                    'username' => 'Edgard'
+                    'username' => 'Edgard',
+                    'name' => 'Edgard',
+                    'surname' => 'Long'
                 ],
                 [
                     'email' => 'emmanuelle@gmail.com',
-                    'username' => 'Emanuelle'
+                    'username' => 'Emanuelle',
+                    'name' => 'Emanuelle',
+                    'surname' => 'Bert'
                 ],
                 [
                     'email' => 'jules.cesar@gmail.com',
-                    'username' => 'Cesar'
+                    'username' => 'Cesar',
+                    'name' => 'Jules',
+                    'surname' => 'Cesar'
                 ],
                 [
                     'email' => 'mathidlepoint@gmail.com',
-                    'username' => 'Mathilde'
+                    'username' => 'Mathilde',
+                    'name' => 'Mathilde',
+                    'surname' => 'Point'
                 ],
                 [
                     'email' => 'robertaejick@gmail.com',
-                    'username' => 'Roberta'
+                    'username' => 'Roberta',
+                    'name' => 'Roberta',
+                    'surname' => 'Jick'
                 ],
                 [
                     'email' => 'fanzine.elle@gmail.com',
-                    'username' => 'Elle'
+                    'username' => 'Elle',
+                    'name' => 'Fanzine',
+                    'surname' => 'Elle'
                 ],
                 [
                     'email' => 'luke@gmail.com',
-                    'username' => 'Luke'
+                    'username' => 'Luke',
+                    'name' => 'Luke',
+                    'surname' => 'Skywalker'
                 ],
             ];
     
@@ -208,7 +243,8 @@ class AppFixtures extends Fixture
                 $customer = new Customer;
                 $customer->setEmail($CustomerListed['email']);
                 $customer->setUsername($CustomerListed['username']);
-               
+                $customer->setName($CustomerListed['name']);
+                $customer->setSurname($CustomerListed['surname']);               
                 $customer->setUser($allUser[0]);
                 $manager->persist($customer);
             }
@@ -218,6 +254,8 @@ class AppFixtures extends Fixture
                 $customer = new Customer;
                 $customer->setEmail($CustomerListed['email']);
                 $customer->setUsername($CustomerListed['username']);
+                $customer->setName($CustomerListed['name']);
+                $customer->setSurname($CustomerListed['surname']); 
                 
                 $customer->setUser($allUser[1]);
                 $manager->persist($customer);
