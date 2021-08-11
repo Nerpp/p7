@@ -18,7 +18,30 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 /**
  * @ApiResource(
  * collectionOperations={
- *         "post"={"path"="signup"},
+ *          "signup"={
+ *                      "method"="post",
+ *                       "path"="/signup",
+ *                      "controller"= User::class,
+ *         "openapi_context"={
+ *                              "summary"="Create an user",
+ *                              "description"="User creation",
+ *                          "requestBody"={
+ *                                          "content"={
+ *                                                       "application/json"={
+ *                                                                          "schema"={
+ *                                                                              "type"="object",
+ *                                                                              "properties"=
+ *                                                                                              {
+ *                                                                                                  "email"={"type"="string"},
+ *                                                                                                  "password"={"type"="string"},
+ *                                                                                                  "name" ={"type"="string"},
+ *                          },
+ *                      },
+ *                  },
+ *              },
+ *          },
+ *      },
+ *  },
  *         "login_check"={
  *                      "method"="post",
  *                       "path"="/login_check",

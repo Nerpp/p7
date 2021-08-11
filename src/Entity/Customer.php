@@ -121,7 +121,7 @@ class Customer
 
     public function setName(string $name): self
     {
-        $this->name = $name;
+        $this->name = filter_var ( $name, FILTER_SANITIZE_SPECIAL_CHARS);
 
         return $this;
     }
@@ -133,7 +133,7 @@ class Customer
 
     public function setSurname(string $surname): self
     {
-        $this->surname = $surname;
+        $this->surname = filter_var ( $surname, FILTER_SANITIZE_SPECIAL_CHARS);
 
         return $this;
     }

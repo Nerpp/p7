@@ -10,6 +10,7 @@ use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Security;
 
+
 final class InsertUser implements EventSubscriberInterface
 {
     private $security;
