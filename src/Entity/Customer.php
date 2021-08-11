@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 
 
@@ -27,6 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 
  * )
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
+ * @UniqueEntity(fields={"email"})
  */
 class Customer
 {
@@ -61,11 +63,13 @@ class Customer
 
     /**
      * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
      */
     private $surname;
 
@@ -133,5 +137,5 @@ class Customer
 
         return $this;
     }
-    
+
 }
