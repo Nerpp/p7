@@ -79,11 +79,11 @@ Cmd:
 ```text
 symfony serve
 ```
- et de se diriger vers la doc
+ et de se diriger vers la doc en copiant l'url ci-dessous
  
  Cmd:
 ```text
-http://http://localhost//api/docs
+http:/localhost/api/docs
 ```
 
 Voir fichier UML pour les détails de fonctionnements.
