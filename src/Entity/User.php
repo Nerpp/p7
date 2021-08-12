@@ -15,33 +15,11 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
 
+
 /**
  * @ApiResource(
  * collectionOperations={
- *          "signup"={
- *                      "method"="post",
- *                       "path"="/signup",
- *                      "controller"= User::class,
- *         "openapi_context"={
- *                              "summary"="Create an user",
- *                              "description"="User creation",
- *                          "requestBody"={
- *                                          "content"={
- *                                                       "application/json"={
- *                                                                          "schema"={
- *                                                                              "type"="object",
- *                                                                              "properties"=
- *                                                                                              {
- *                                                                                                  "email"={"type"="string"},
- *                                                                                                  "password"={"type"="string"},
- *                                                                                                  "name" ={"type"="string"},
- *                          },
- *                      },
- *                  },
- *              },
- *          },
- *      },
- *  },
+ *         "post"={"path"="signup"},
  *         "login_check"={
  *                      "method"="post",
  *                       "path"="/login_check",
@@ -89,7 +67,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank()
-     * @Assert\Email(message = "Votre mail n'est pas valide")
+     * @Assert\Email(message = "Votre email n'est pas valide")
      */
     private $email;
 
@@ -101,9 +79,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\Regex(
+     *@Assert\Regex(
      *      pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*\W).{8,}$/",
-     *      message="Votre mot de passe doit être constiitué de minuscule, de caractéres spéciaux et de caractéres numérique"
+     *      message="Votre mot de passe doit être constitué de minuscule, de caractéres spéciaux et de caractéres numérique"
      * )
      */
     private $password;
