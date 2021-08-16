@@ -5,7 +5,9 @@ namespace App\Entity;
 use App\Entity\Customer;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,7 +21,27 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 /**
  * @ApiResource(
  * collectionOperations={
- *         "post"={"path"="signup"},
+ *         "post"={
+ *                  "path"="signup",
+ *                  "openapi_context"={
+ *                                      
+ *                                       "requestBody"={
+ *                                                      "content"={
+ *                                                                  "application/json"={
+ *                                                                                       "schema"={
+ *                                                                                                      "type"="object",
+ *                                                                                                       "properties"={
+ *                                                                                                                     "password"={"type"="string"},
+ *                                                                                                                     "username" ={"type"="string"},
+ *                                                                                                                     "name" ={"type"="string"}
+ *                          }
+ *                      }
+ *                  }
+ *              }
+ *         }
+ *      }
+ *                  
+ * },
  *         "login_check"={
  *                      "method"="post",
  *                       "path"="/login_check",
@@ -53,6 +75,8 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  * 
  * @UniqueEntity(fields={"name"})
  * @UniqueEntity(fields={"email"})
+ * 
+ * 
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -140,6 +164,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @see UserInterface
+     *  
      */
     public function getRoles(): array
     {
