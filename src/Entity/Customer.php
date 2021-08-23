@@ -9,14 +9,34 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
-
-
 /**
  * @ApiResource(
  * attributes={"pagination_items_per_page"=5,"security"="is_granted('ROLE_USER')" },
  * collectionOperations={
  * "get",
- * "post"
+ * "post"={
+ *                  
+ *                  "openapi_context"={
+ *                                      
+ *                                       "requestBody"={
+ *                                                      "content"={
+ *                                                                  "application/json"={
+ *                                                                                       "schema"={
+ *                                                                                                      "type"="object",
+ *                                                                                                       "properties"={
+ *                                                                                                                     "password"={"type"="string"},
+ *                                                                                                                     "username" ={"type"="string"},
+ *                                                                                                                     "name" ={"type"="string"},
+ *                                                                                                                     "surname" ={"type"="string"},
+ *                                                                                                                     "email" ={"type"="string"}
+ *                          }
+ *                      }
+ *                  }
+ *              }
+ *         }
+ *      }
+ *                  
+ * },
  * },
  * 
  * itemOperations={
