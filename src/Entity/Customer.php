@@ -2,13 +2,53 @@
 
 namespace App\Entity;
 
+// use Webmozart\Assert\Assert;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @ApiResource(
+ * attributes={"pagination_items_per_page"=5,"security"="is_granted('ROLE_USER')" },
+ * collectionOperations={
+ * "get",
+ * "post"={
+ *                  
+ *                  "openapi_context"={
+ *                                      
+ *                                       "requestBody"={
+ *                                                      "content"={
+ *                                                                  "application/json"={
+ *                                                                                       "schema"={
+ *                                                                                                      "type"="object",
+ *                                                                                                       "properties"={
+ *                                                                                                                     "password"={"type"="string"},
+ *                                                                                                                     "username" ={"type"="string"},
+ *                                                                                                                     "name" ={"type"="string"},
+ *                                                                                                                     "surname" ={"type"="string"},
+ *                                                                                                                     "email" ={"type"="string"}
+ *                          }
+ *                      }
+ *                  }
+ *              }
+ *         }
+ *      }
+ *                  
+ * },
+ * },
+ * 
+ * itemOperations={
+ * "get",
+ * "put",
+ * "delete"
+ * },
+ * 
+ * 
+ * )
  * @ORM\Entity(repositoryClass=CustomerRepository::class)
- * @ApiResource
+ * @UniqueEntity(fields={"email"})
  */
 class Customer
 {
@@ -16,29 +56,42 @@ class Customer
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * 
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
      */
     private $username;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
+     * @Assert\Email(message = "Votre mail n'est pas valide")
      */
     private $email;
 
+    
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdAt;
-
-    /**
+     * @var User The owner
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="customer")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+    /**
+     * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=45)
+     * @Assert\NotBlank()
+     */
+    private $surname;
 
     public function getId(): ?int
     {
@@ -69,18 +122,6 @@ class Customer
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -92,4 +133,29 @@ class Customer
 
         return $this;
     }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = filter_var ( $name, FILTER_SANITIZE_SPECIAL_CHARS);
+
+        return $this;
+    }
+
+    public function getSurname(): ?string
+    {
+        return $this->surname;
+    }
+
+    public function setSurname(string $surname): self
+    {
+        $this->surname = filter_var ( $surname, FILTER_SANITIZE_SPECIAL_CHARS);
+
+        return $this;
+    }
+
 }

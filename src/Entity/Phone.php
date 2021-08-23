@@ -2,15 +2,24 @@
 
 namespace App\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ProductRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Repository\PhoneRepository;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProductRepository::class)
- * @ApiResource
+ * 
+ * @ApiResource(
+ *      attributes={"pagination_items_per_page"=2,"security"="is_granted('ROLE_USER')" },
+ *      itemOperations={
+ *                      "get"
+ *                     },
+ *      collectionOperations={
+ *                        "get"
+ *                      }
+ * )
+ * @ORM\Entity(repositoryClass=PhoneRepository::class)
  */
-class Product
+class Phone
 {
     /**
      * @ORM\Id
@@ -20,39 +29,34 @@ class Product
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $brand;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $battery;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $ram;
-
-    /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $generation;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
     private $system;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=45)
      */
-    private $intern_memory;
+    private $internMemory;
 
     /**
      * @ORM\Column(type="datetime")
@@ -60,25 +64,19 @@ class Product
     private $createdAt;
 
     /**
-     * @ORM\Column(type="json")
-     */
-    private $property = [];
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="product")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $user;
-
-    /**
      * @ORM\Column(type="float")
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="string", length=45)
+     */
+    private $ram;
 
     public function getId(): ?int
     {
@@ -121,18 +119,6 @@ class Product
         return $this;
     }
 
-    public function getRam(): ?string
-    {
-        return $this->ram;
-    }
-
-    public function setRam(string $ram): self
-    {
-        $this->ram = $ram;
-
-        return $this;
-    }
-
     public function getGeneration(): ?string
     {
         return $this->generation;
@@ -159,12 +145,12 @@ class Product
 
     public function getInternMemory(): ?string
     {
-        return $this->intern_memory;
+        return $this->internMemory;
     }
 
-    public function setInternMemory(string $intern_memory): self
+    public function setInternMemory(string $internMemory): self
     {
-        $this->intern_memory = $intern_memory;
+        $this->internMemory = $internMemory;
 
         return $this;
     }
@@ -181,18 +167,6 @@ class Product
         return $this;
     }
 
-    public function getProperty(): ?array
-    {
-        return $this->property;
-    }
-
-    public function setProperty(array $property): self
-    {
-        $this->property = $property;
-
-        return $this;
-    }
-
     public function getDescription(): ?string
     {
         return $this->description;
@@ -205,18 +179,6 @@ class Product
         return $this;
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
     public function getPrice(): ?float
     {
         return $this->price;
@@ -225,6 +187,18 @@ class Product
     public function setPrice(float $price): self
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getRam(): ?string
+    {
+        return $this->ram;
+    }
+
+    public function setRam(string $ram): self
+    {
+        $this->ram = $ram;
 
         return $this;
     }
