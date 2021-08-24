@@ -6,6 +6,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CustomerRepository;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Validator\Constraints\Regex;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -63,6 +64,10 @@ class Customer
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
+     * @Assert\Regex(
+     *      pattern="/[^#?,;.¤{}()`_@&~]/",
+     *      match=false,
+     *      message="Name ne doit pas contenir de caractéres spéciaux"
      */
     private $username;
 
@@ -84,12 +89,21 @@ class Customer
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
+     * @Assert\Regex(
+     *      pattern="/[^#?,;.¤{}()`_@&~]/",
+     *      match=false,
+     *      message="Name ne doit pas contenir de caractéres spéciaux"
+     * )
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
+     * @Assert\Regex(
+     *      pattern="/[^#?,;.¤{}()`_@&~]/",
+     *      match=false,
+     *      message="Name ne doit pas contenir de caractéres spéciaux"
      */
     private $surname;
 
