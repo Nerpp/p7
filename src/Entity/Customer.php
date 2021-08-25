@@ -68,6 +68,7 @@ class Customer
      *      pattern="/[^#?,;.¤{}()`_@&~]/",
      *      match=false,
      *      message="Name ne doit pas contenir de caractéres spéciaux"
+     * )
      */
     private $username;
 
@@ -104,6 +105,7 @@ class Customer
      *      pattern="/[^#?,;.¤{}()`_@&~]/",
      *      match=false,
      *      message="Name ne doit pas contenir de caractéres spéciaux"
+     * )
      */
     private $surname;
 
