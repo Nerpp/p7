@@ -65,9 +65,9 @@ class Customer
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
      * @Assert\Regex(
-     *      pattern="/[^#?,;.¤{}()`_@&~]/",
+     *      pattern="/[#?,;.¤{}()`_@&~]/i",
      *      match=false,
-     *      message="Name ne doit pas contenir de caractéres spéciaux"
+     *      message="username ne doit pas contenir de caractéres spéciaux"
      * )
      */
     private $username;
@@ -91,8 +91,8 @@ class Customer
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
      * @Assert\Regex(
-     *      pattern="/[^#?,;.¤{}()`_@&~]/",
-     *      match=false,
+     *      pattern="/[#?,;.¤{}()`_@&~]/i",
+     *      match=true,
      *      message="Name ne doit pas contenir de caractéres spéciaux"
      * )
      */
@@ -102,8 +102,8 @@ class Customer
      * @ORM\Column(type="string", length=45)
      * @Assert\NotBlank()
      * @Assert\Regex(
-     *      pattern="/[^#?,;.¤{}()`_@&~]/",
-     *      match=false,
+     *      pattern="/[#?,;.¤{}()`_@&~]/i",
+     *      match=true,
      *      message="Name ne doit pas contenir de caractéres spéciaux"
      * )
      */
